@@ -1,2 +1,2 @@
 # tvbox-config-updater
-tvbox 配置文件自动更新文件
+tvbox 配置文件自动更新程序
