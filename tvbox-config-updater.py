@@ -46,12 +46,11 @@ def save_tvbox_config_json_to_file(tvbox_config_json, task_config, task_num, is_
 
     # 输出日志
     if is_merge_config:
-        print(
-            f'{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [任务 {task_num}] - 聚合配置文件输出成功: {output_file_path}')
+        print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - [任务 {task_num}]'
+              f' - 聚合配置文件输出成功: {output_file_path}')
     else:
-        print(
-            f'{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [任务 {task_num}] - [{task_config['name']}] '
-            f'- 配置文件替换完成: {output_file_path}')
+        print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - [任务 {task_num}] - [{task_config["name"]}]'
+              f' - 配置文件替换完成: {output_file_path}')
 
 
 # 执行单个配置文件的任务
@@ -64,7 +63,7 @@ def execute(config_json_path, task_num):
             config_json = json.load(input_config_json)
 
     except Exception as e:
-        print(f'{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [任务 {task_num}] - 读取配置文件错误，请检查')
+        print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - [任务 {task_num}] - 读取配置文件错误，请检查')
         raise e
 
     # 聚合输出参数准备
@@ -93,9 +92,8 @@ def execute(config_json_path, task_num):
                 # 下载文件，将内容保存到文件，并得到文件内容
                 tvbox_config_content = inputfile.process_download(task_config, task_num)
             else:
-                print(
-                    f'{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [任务 {task_num}] - [{task_name}] - 任务执行异常：请输入 inputFilePath '
-                    f'或 url+downloadFilePath')
+                print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - [任务 {task_num}] - '
+                      f'[{task_name}] - 任务执行异常：请输入 inputFilePath 或 url+downloadFilePath')
                 continue
 
             # 2. 清洗文件，得到 json dict 对象
@@ -111,7 +109,7 @@ def execute(config_json_path, task_num):
             if enable_merge:
                 tvbox_config_json_list.append(tvbox_config_json)
         except Exception as e:
-            print(f'{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [任务 {task_num}] - [{task_name}] - 任务执行异常')
+            print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - [任务 {task_num}] - [{task_name}] - 任务执行异常')
             raise e
 
     # 聚合输出
@@ -184,4 +182,4 @@ if __name__ == '__main__':
         execute(config_json_file_path, i)
 
     # 输出日志
-    print(f'{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - 所有任务执行完成')
+    print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - 所有任务执行完成')

@@ -23,7 +23,7 @@ def download_file(task_num, task_name, url, download_file_path):
             with open(download_file_path, 'wb') as file:
                 file.write(response.content)
 
-            print(f'{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [任务 {task_num}] - [{task_name}]'
+            print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - [任务 {task_num}] - [{task_name}]'
                   f' - 文件下载成功: {download_file_path}')
 
             # 将下载的内容返回，不需要再从文件读入，文件下载仅作保存使用
@@ -31,13 +31,13 @@ def download_file(task_num, task_name, url, download_file_path):
 
         except requests.exceptions.RequestException as e:
             print(
-                f'{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [任务 {task_num}] - [{task_name}]'
+                f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - [任务 {task_num}] - [{task_name}]'
                 f' - 文件下载失败 (第 {attempt} 次尝试)')
             attempt += 1
 
     # 重试下载失败，直接抛出异常
     if attempt > retry_count:
-        print(f'{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [任务 {task_num}] - [{task_name}]'
+        print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - [任务 {task_num}] - [{task_name}]'
               f' - 下载失败 (共重试 {retry_count} 次)')
         raise Exception
 
