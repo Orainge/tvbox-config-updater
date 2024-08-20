@@ -4,7 +4,7 @@ tvbox 配置文件更新合并程序
 启动命令：
 
 ```sh
-python tvbox-config-updater.py <json 配置文件路径, 默认为当前命令路径下的 config.json>
+python tvbox-config-updater.py <json 配置文件路径, 可以填写多个，多个按照顺序执行，默认为当前命令路径下的 config.json>
 ```
 
 # 1 程序执行流程说明
@@ -28,10 +28,11 @@ python tvbox-config-updater.py <json 配置文件路径, 默认为当前命令�
 {
 	"taskConfig": [{
 		"name": "XX平台",
-        "url": "http://xxx.xxx/xx.json",
-        "downloadFilePath": "/home/test/a.json",
+		"url": "http://xxx.xxx/xx.json",
+		"downloadFilePath": "/home/test/a.json",
+		"inputFilePath": "/home/test/a_input.json",
 		"outputFilePath": "/home/test/a_output.json",
-        "jsonFormatting": true,
+		"jsonFormatting": true,
 		"filter": {
 			"keepSitesName": ["影视仓", "XX影视"],
 			"keepParsesName": ["Json聚合", "Web聚合"],
@@ -40,7 +41,28 @@ python tvbox-config-updater.py <json 配置文件路径, 默认为当前命令�
 		"replace": {
 			"spider": "http://xx.xx",
 			"wallpaper": "http://xx.xx",
-			"logo": "http://xx.xx"
+			"logo": "http://xx.xx",
+			"sites": [{
+				"key": "xxx",
+				"name": "xxx",
+				"type": 3,
+				"searchable": 0,
+				"ext": "http://xx.xxx",
+				"api": "http://xx.xxx"
+			}],
+			"parses": [{
+				"name": "xxx",
+				"type": 3,
+				"url": "xxx"
+			}],
+			"lives": [{
+				"name": "live",
+				"type": 0,
+				"playerType": 1,
+				"url": "http://xx.xxx",
+				"epg": "http://xx.xxx",
+				"logo": "http://xx.xxx"
+			}]
 		},
 		"append": {
 			"sites": [{
@@ -74,7 +96,7 @@ python tvbox-config-updater.py <json 配置文件路径, 默认为当前命令�
 	"mergeConfig": {
 		"enable": true,
 		"outputFilePath": "/home/test/merge.json",
-        "jsonFormatting": true,
+		"jsonFormatting": true,
 		"config": {
 			"filter": {
 				"keepSitesName": ["影视仓", "XX影视"],
@@ -84,7 +106,28 @@ python tvbox-config-updater.py <json 配置文件路径, 默认为当前命令�
 			"replace": {
 				"spider": "http://xx.xx",
 				"wallpaper": "http://xx.xx",
-				"logo": "http://xx.xx"
+				"logo": "http://xx.xx",
+				"sites": [{
+					"key": "xxx",
+					"name": "xxx",
+					"type": 3,
+					"searchable": 0,
+					"ext": "http://xx.xxx",
+					"api": "http://xx.xxx"
+				}],
+				"parses": [{
+					"name": "xxx",
+					"type": 3,
+					"url": "xxx"
+				}],
+				"lives": [{
+					"name": "live",
+					"type": 0,
+					"playerType": 1,
+					"url": "http://xx.xxx",
+					"epg": "http://xx.xxx",
+					"logo": "http://xx.xxx"
+				}]
 			},
 			"append": {
 				"sites": [{
@@ -133,8 +176,9 @@ python tvbox-config-updater.py <json 配置文件路径, 默认为当前命令�
 | 参数名称         | 可选/必选 | 类型    | 说明                                                         | 示例                       |
 | ---------------- | --------- | ------- | ------------------------------------------------------------ | -------------------------- |
 | name             | 必选      | String  | 配置项名称，用于日志输出                                     | XX平台                     |
-| url              | 必选      | String  | 原始tvbox配置文件的 URL                                      | "http://xxx.xxx/xx.json"   |
-| downloadFilePath | 必选      | String  | 下载的tvbox配置文件的存放路径                                | "/home/test/a.json"        |
+| url              | 可选      | String  | 下载的tvbox配置文件的URL（下载与文件输入二选一）             | "http://xxx.xxx/xx.json"   |
+| downloadFilePath | 可选      | String  | 下载的tvbox配置文件的存放路径（输入URL时必填，下载与文件输入二选一） | "/home/test/a.json"        |
+| inputFilePath    | 可选      | String  | 输入的tvbox配置文件的存放路径（下载与文件输入二选一）        | "/home/test/a_input.json"  |
 | outputFilePath   | 必选      | String  | 输出的tvbox配置文件的存放路径                                | "/home/test/a_output.json" |
 | jsonFormatting   | 可选      | Boolean | 输出的tvbox配置文件是否格式化，默认为false，设置为false关闭格式化可以减小文件体积 | true                       |
 | filter           | 可选      | Object  | 配置项：过滤器                                               |                            |
@@ -160,13 +204,16 @@ python tvbox-config-updater.py <json 配置文件路径, 默认为当前命令�
 
 ### 4.2.2 replace
 
-| 参数名称  | 可选/必选 | 类型   | 说明                                        | 示例           |
-| --------- | --------- | ------ | ------------------------------------------- | -------------- |
-| spider    | 可选      | String | 覆写参数 "spider" 的值，不填写表示不复写    | "http://xx.xx" |
-| wallpaper | 可选      | String | 覆写参数 "wallpaper" 的值，不填写表示不复写 | "http://xx.xx" |
-| logo      | 可选      | String | 覆写参数 "logo" 的值，不填写表示不复写      | "http://xx.xx" |
+| 参数名称  | 可选/必选 | 类型     | 说明                                                  | 示例           |
+| --------- | --------- | -------- | ----------------------------------------------------- | -------------- |
+| spider    | 可选      | String   | 覆写参数 "spider" 的值，不填写表示不复写              | "http://xx.xx" |
+| wallpaper | 可选      | String   | 覆写参数 "wallpaper" 的值，不填写表示不复写           | "http://xx.xx" |
+| logo      | 可选      | String   | 覆写参数 "logo" 的值，不填写表示不复写                | "http://xx.xx" |
+| sites     | 可选      | [Object] | 根据key，对应修改 "sites" 里面的值，不填写表示不复写  |                |
+| parses    | 可选      | [Object] | 根据key，对应修改 "parses" 里面的值，不填写表示不复写 |                |
+| lives     | 可选      | [Object] | 根据key，对应修改 "lives" 里面的值，不填写表示不复写  |                |
 
-### 4.2.3 replace
+### 4.2.3 append
 
 | 参数名称 | 可选/必选 | 类型     | 说明                                     | 示例 |
 | -------- | --------- | -------- | ---------------------------------------- | ---- |

@@ -1,10 +1,11 @@
 {
 	"taskConfig": [{
 		"name": "XX平台",
-        "url": "http://xxx.xxx/xx.json",
-        "downloadFilePath": "/home/test/a.json",
+		"url": "http://xxx.xxx/xx.json",
+		"downloadFilePath": "/home/test/a.json",
+		"inputFilePath": "/home/test/a_input.json",
 		"outputFilePath": "/home/test/a_output.json",
-        "jsonFormatting": true,
+		"jsonFormatting": true,
 		"filter": {
 			"keepSitesName": ["影视仓", "XX影视"],
 			"keepParsesName": ["Json聚合", "Web聚合"],
@@ -13,7 +14,28 @@
 		"replace": {
 			"spider": "http://xx.xx",
 			"wallpaper": "http://xx.xx",
-			"logo": "http://xx.xx"
+			"logo": "http://xx.xx",
+			"sites": [{
+				"key": "xxx",
+				"name": "xxx",
+				"type": 3,
+				"searchable": 0,
+				"ext": "http://xx.xxx",
+				"api": "http://xx.xxx"
+			}],
+			"parses": [{
+				"name": "xxx",
+				"type": 3,
+				"url": "xxx"
+			}],
+			"lives": [{
+				"name": "live",
+				"type": 0,
+				"playerType": 1,
+				"url": "http://xx.xxx",
+				"epg": "http://xx.xxx",
+				"logo": "http://xx.xxx"
+			}]
 		},
 		"append": {
 			"sites": [{
@@ -47,7 +69,7 @@
 	"mergeConfig": {
 		"enable": true,
 		"outputFilePath": "/home/test/merge.json",
-        "jsonFormatting": true,
+		"jsonFormatting": true,
 		"config": {
 			"filter": {
 				"keepSitesName": ["影视仓", "XX影视"],
@@ -57,7 +79,28 @@
 			"replace": {
 				"spider": "http://xx.xx",
 				"wallpaper": "http://xx.xx",
-				"logo": "http://xx.xx"
+				"logo": "http://xx.xx",
+				"sites": [{
+					"key": "xxx",
+					"name": "xxx",
+					"type": 3,
+					"searchable": 0,
+					"ext": "http://xx.xxx",
+					"api": "http://xx.xxx"
+				}],
+				"parses": [{
+					"name": "xxx",
+					"type": 3,
+					"url": "xxx"
+				}],
+				"lives": [{
+					"name": "live",
+					"type": 0,
+					"playerType": 1,
+					"url": "http://xx.xxx",
+					"epg": "http://xx.xxx",
+					"logo": "http://xx.xxx"
+				}]
 			},
 			"append": {
 				"sites": [{
