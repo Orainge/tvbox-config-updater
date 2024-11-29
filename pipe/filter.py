@@ -17,10 +17,14 @@ def filter_keep(tvbox_config_json, regex_dict, key_name, second_key_name):
     regexes = [re.compile(regex)
                for regex in regex_dict if regex != '']
 
-    if key_name in tvbox_config_json:
-        # any: 任一条件满足; all: 所有条件满足
-        tvbox_config_json[key_name] = [key_data for key_data in tvbox_config_json[key_name]
-                                       if any(regex.search(key_data[second_key_name]) for regex in regexes)]
+    try:
+        if key_name in tvbox_config_json:
+            # any: 任一条件满足; all: 所有条件满足
+            tvbox_config_json[key_name] = [key_data for key_data in tvbox_config_json[key_name]
+                                           if second_key_name in key_data
+                                           and any(regex.search(key_data[second_key_name]) for regex in regexes)]
+    except Exception as e:
+        raise e
 
 
 # 过滤处理

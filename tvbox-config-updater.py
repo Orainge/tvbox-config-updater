@@ -139,13 +139,14 @@ def execute(config_json_path, task_num):
                 if key in tvbox_config_json:
                     merge_tvbox_config_json[key].extend(tvbox_config_json[key])
 
-            # 1.3 向每个项目追加项 jar, 值为 各自的 spider 的值（如有）
+            # 1.3 向每个项目追加项 jar（如果不存在 jar）, 值为 各自的 spider 的值（如有）
             if ('spider' in tvbox_config_json
                     and tvbox_config_json['spider'] is not None
                     and tvbox_config_json['spider'] != ''):
                 spider = tvbox_config_json['spider']
                 for site in tvbox_config_json['sites']:
-                    site['jar'] = spider
+                    if 'jar' not in site:
+                        site['jar'] = spider
 
             # 1.4 取第一个有值的项目
             for key in get_first_value_keys:
