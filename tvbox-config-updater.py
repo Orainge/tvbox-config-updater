@@ -532,7 +532,7 @@ class MergeTask:
 
         # 2. 处理配置文件
         self.merge_tvbox_config = ProcessTask(tvbox_config=self.merge_tvbox_config,
-                                              process_task_config=self.merge_config,
+                                              process_task_config=self.merge_config['config'],
                                               task_name="聚合任务").execute()
 
         # 3. 将聚合后的配置文件写入到目标文件中
@@ -704,6 +704,10 @@ class ProcessTask:
                 self.tvbox_config[key] = value
             else:
                 # 根据 key 进行替换
+                # 如果列表不存在，应该先新建
+                if key not in self.tvbox_config:
+                    self.tvbox_config[key] = []
+
                 target_list = self.tvbox_config[key]  # 原始列表
                 replace_list = value.copy()  # 需要替换的列表
 
@@ -738,6 +742,8 @@ class ProcessTask:
         if self.tvbox_config is not None and len(append_config) > 0:
             for key, values in append_config.items():
                 for value in values:
+                    if key not in self.tvbox_config:
+                        self.tvbox_config = []
                     self.tvbox_config[key].append(value)
 
     def _order(self, config_key: str):
