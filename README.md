@@ -1,5 +1,5 @@
-# tvbox-config-updater
-tvbox 配置文件更新合并程序
+# tvbox 配置文件更新助手
+tvbox 配置文件更新助手
 
 启动命令：
 
@@ -177,7 +177,9 @@ python tvbox-config-updater.py <json 配置文件路径, 可以填写多个，�
 | ---------------- | --------- | ------- | ------------------------------------------------------------ | -------------------------- |
 | name             | 必选      | String  | 配置项名称，用于日志输出                                     | XX平台                     |
 | url              | 可选      | String  | 下载的tvbox配置文件的URL（下载与文件输入二选一）             | "http://xxx.xxx/xx.json"   |
-| downloadFilePath | 可选      | String  | 下载的tvbox配置文件的存放路径（输入URL时必填，下载与文件输入二选一） | "/home/test/a.json"        |
+| userAgent        | 可选      | String  | 下载文件使用的用户代理，默认值："okhttp/3.15"                | "okhttp/3.15"              |
+| retryTimes       | 可选      | String  | 下载文件重试次数，默认值：3                                  | 3                          |
+| downloadFilePath | 可选      | String  | 下载的tvbox配置文件的存放路径                                | "/home/test/a.json"        |
 | inputFilePath    | 可选      | String  | 输入的tvbox配置文件的存放路径（下载与文件输入二选一）        | "/home/test/a_input.json"  |
 | outputFilePath   | 必选      | String  | 输出的tvbox配置文件的存放路径                                | "/home/test/a_output.json" |
 | jsonFormatting   | 可选      | Boolean | 输出的tvbox配置文件是否格式化，默认为false，设置为false关闭格式化可以减小文件体积 | true                       |
